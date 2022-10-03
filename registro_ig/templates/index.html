@@ -12,23 +12,25 @@
                 </tr>
             </thead>
             <tbody>
+                {% for movement in data %}
                 <tr>
-                    <td>2022-01-01</td>
-                    <td>Sueldo</td>
-                    <td>1000.00 €</td>
+                    <td>{{ movement.date }}</td>
+                    <td>{{ movement.concept }}</td>
+                    <td>{{ movement.quantity }} €</td>
                     <td>
-                        <a href="/update/1">
+                        <a href="/update/{{movement.id}}">
                             <span class="material-symbols-outlined">
                                 edit
                             </span>
                         </a>
-                        <a href="/delete/1">
+                        <a href="/delete/{{movement.id}}">
                             <span class="material-symbols-outlined">
                                 delete
                             </span>
                         </a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
 {% endblock %}
