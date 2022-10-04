@@ -1,6 +1,7 @@
 from distutils.log import error
 from flask import render_template, request, redirect, url_for
 from registro_ig import app
+from registro_ig.forms import MovementForm
 from registro_ig.models import select_all, insert
 from datetime import date
 
@@ -31,17 +32,17 @@ def validaFormulario(camposFormulario):
 
 @app.route("/new", methods=["GET", "POST"])
 def new():
+    form = MovementForm()
     if request.method == "GET":
-        return render_template("new.html", dataForm=None)
+        return render_template("new.html", el_formulario=form, pageTitle="Nuevo")
     else:
-        errores = validaFormulario(request.form)
-        if not errores:
-            insert([request.form['date'],
-                    request.form['concept'],
-                    request.form['quantity']
+        if form.validate():
+            insert([form.date.data.isoformat(),
+                    form.concept.data,
+                    form.quantity.data
                   ])
             return redirect(url_for("index"))
 
 
         else:
-            return render_template("new.html", dataForm=request.form, msgErrors=errores)
+            return render_template("new.html", el_formulario=form)

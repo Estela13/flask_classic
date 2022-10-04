@@ -4,30 +4,35 @@
 <h1>Alta de Ingreso-Gasto</h1>
 <article>
     <form action="/new" method="post">
-            <label for="date">Fecha:</label>
-            <input type="date" name="date" 
-                value="{{ dataForm.date }}" required>
+        {{ el_formulario.csrf_token }}
 
-            <label for="concept">Concepto:</label>
-            <input type="text" name="concept" 
-                placeholder="Introduce en que te has gastado la pasta"
-                value="{{ dataForm.concept }}">
+        {{ el_formulario.date.label }}
+        {{ el_formulario.date }}
+        {% if el_formulario.date.errors %}
+            {% for error in el_formulario.date.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
 
-            <label for="quantity">Cantidad</label>
-            <input type="number" name="quantity" 
-                placeholder="Euros gastados o ingresados" 
-                step="0.01"
-                value="{{ dataForm.quantity }}">
+        {{ el_formulario.concept.label }}
+        {{ el_formulario.concept(placeholder="Introduce en que te has gastado la pasta") }}    
+        {% if el_formulario.concept.errors %}
+            {% for error in el_formulario.concept.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
 
-            <input type="submit" value="Aceptar">
+        {{ el_formulario.quantity.label }}
+        {{ el_formulario.quantity(class="elEnric", placeholder="Euros gastados o ingresados") }}    
+        {% if el_formulario.quantity.errors %}
+            {% for error in el_formulario.quantity.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {{ el_formulario.submit }}
     </form>
 </article>
-<article class="errores">
-    <ul>
-            {% for error in msgErrors %}
-            <li>{{ error }}</li>
-            {% endfor %}
-    </ul>
-</article>
+
 
 {% endblock %}

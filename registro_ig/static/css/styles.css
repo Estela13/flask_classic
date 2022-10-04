@@ -11,3 +11,12 @@ body {
     grid-template-rows: auto 50px 1fr auto;
     margin: 0;
 }
+p.error {
+    color: red;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.number {
+    text-align: right;
+}
