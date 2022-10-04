@@ -20,3 +20,9 @@ p.error {
 .number {
     text-align: right;
 }
+
+.return {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
