@@ -38,3 +38,9 @@ def insert(registro):
     params:     cur.execute("INSERT INTO movements (date, concept, quantity) values (?, ?, ?)", ['2022-04-08', 'Cumple', -80])
     conn.commit() antes de hacer el conn.close()
     """
+    conn = sqlite3.connect(ORIGIN_DATA)
+    cur = conn.cursor()
+
+    cur.execute("INSERT INTO movements (date, concept, quantity) values (?, ?, ?);", registro)
+    conn.commit()
+    conn.close()
